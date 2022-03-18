@@ -4,7 +4,7 @@ import React from "react";
 export const sample = () => {
     return (
         <div>
-            <h1>hello</h1>
+            <h1>hello Team</h1>
         </div>
     )
 }
