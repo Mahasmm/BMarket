@@ -1,0 +1,52 @@
+@import '../../styles/appvar.less';
+
+.layoutdesign {
+  background-color: linear-gradient(180deg, #fdcd3b 80%, #ffed4b 20%) !important;
+}
+
+.testdesign {
+  background-color: #3a99dd;
+  width: 100%;
+  padding: 60px;
+  position: fixed;
+  top: 89%;
+  overflow: hidden;
+  border-radius: 30px 30px 0px 0px;
+
+  @media (max-width: @screen-md-min) {
+    top: 87%;
+    padding: 80px;
+  }
+  @media (max-width: @screen-xs-max) {
+    top: 85%;
+    padding: 80px;
+  }
+}
+
+.bodylayout {
+  position: relative;
+}
+
+.topnavbar {
+  display: flex;
+  height: 20px;
+  background: #3a99dd;
+}
+
+.container {
+  :global {
+    .ant-layout-header {
+      background: white !important;
+      height: 40px;
+    }
+  }
+}
+
+.menunavbar {
+  background: #bcddf4;
+  :global {
+    .ant-menu-item:hover::after {
+      border-bottom: none !important;
+    }
+  }
+}

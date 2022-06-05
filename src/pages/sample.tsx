@@ -1,3 +1,3 @@
-import { AgentNavBAr } from './../layout/AgentNavBar';
+import { sample } from '../page-components/sample';
 
-export default AgentNavBAr;
+export default sample;
