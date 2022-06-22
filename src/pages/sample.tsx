@@ -1,3 +1,3 @@
-import { sample } from '../page-components/sample';
+import { AgentDetails } from '../page-components/company/ManPower/AgentDetails';
 
-export default sample;
+export default AgentDetails;
