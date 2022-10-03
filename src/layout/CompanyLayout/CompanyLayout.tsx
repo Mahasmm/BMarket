@@ -2,18 +2,28 @@ import React, { FC } from 'react';
 import { Layout, Avatar } from 'antd';
 import styles from './CompanyLayout.module.less';
 import { LeftOutlined, EnvironmentFilled } from '@ant-design/icons';
+import { useRouter } from 'next/router';
 
 type Props = {
   title: string;
 };
 export const CompanyLayout: FC<Props> = (props) => {
+  const history = useRouter();
+
+  const backButton = () => {
+    history.back();
+  };
+
   return (
     <Layout>
       <div className={styles.container}>
         <div className={styles.topView}></div>
         <div className={styles.headerView}>
           <div className={styles.arrowView}>
-            <LeftOutlined style={{ fontSize: '22px', color: '#564F4F' }} />
+            <a onClick={() => backButton}>
+              <LeftOutlined style={{ fontSize: '22px', color: '#564F4F' }} />
+            </a>
+
             <h3>{props.title}</h3>
           </div>
         </div>

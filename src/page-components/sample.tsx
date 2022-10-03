@@ -1,14 +1,46 @@
-import React from 'react';
+import React, { useState, ForwardRefRenderFunction, useImperativeHandle } from 'react';
 import { AgentLayout } from '../layout/AgentLayout/AgentLayout';
+import { Button, Modal, List, Checkbox } from 'antd';
 
-export const sample = () => {
+export type HotTipsRef = {
+  onVisible: (data: any) => void;
+};
+
+type Props = {
+  data: string;
+};
+
+const Sample: ForwardRefRenderFunction<HotTipsRef, Props> = (props, ref) => {
+  const [visible, setVisible] = useState<boolean>(false);
+  const [item, setItem] = useState();
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      onVisible: (data) => {
+        setItem(data);
+        setVisible(true);
+      },
+    }),
+    [],
+  );
+
+  const handleOk = () => {
+    setVisible(false);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
   return (
-    <AgentLayout title={'Workers'}>
-      <h1>This is my first children setup</h1>
-      <p> hi hello helo</p>
-      <h3 style={{ color: 'green' }}>1234</h3>
-      <h1>This is my first children setup</h1>
-      <h3 style={{ color: 'green' }}>1234</h3>
-    </AgentLayout>
+    <Modal title="Skilled" visible={visible} onOk={handleOk} onCancel={handleCancel}>
+      <div>
+        <h1>hello hi</h1>
+        <h3>{item}</h3>
+      </div>
+    </Modal>
   );
 };
+
+export default React.forwardRef<HotTipsRef>(Sample);

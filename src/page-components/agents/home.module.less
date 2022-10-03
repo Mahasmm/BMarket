@@ -1,4 +1,4 @@
-@import '../../../styles/appvar.less';
+@import '../../styles/appvar.less';
 
 .container {
   display: flex;
@@ -117,17 +117,20 @@
 }
 
 .itemContainer {
+  @media (max-width: @screen-lg-max) {
+    padding-top: 60px;
+  }
   @media (max-width: @screen-lg) {
     padding-top: 100px;
   }
   @media (max-width: @screen-md-min) {
-    padding-top: 60px;
+    padding-top: 150px;
   }
   @media (max-width: @screen-xs-max) {
-    padding-top: 20px;
+    padding-top: 100px;
   }
   @media (max-width: 380px) {
-    margin-top: -3rem;
+    // margin-top: 1px;
   }
 }
 
@@ -158,17 +161,6 @@
 .gridIconName p {
   font-size: 13px;
   font-weight: 500;
-}
-
-.hello {
-  :global {
-    .ant-layout-sider-collapsed {
-      min-width: 0px !important;
-      flex: 0 0 0px !important;
-      max-width: 0px !important;
-      width: 0px !important;
-    }
-  }
 }
 
 .topSliderView {

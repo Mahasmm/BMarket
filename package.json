@@ -6,12 +6,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install",
-    "check-types": "tsc --pretty --noEmit",
-    "check-format": "prettier --check .",
-    "check-lint": "eslint . --ext ts --ext tsx --ext js",
-    "format": "prettier --write .",
-    "test-all": "yarn run check-format && yarn run check-lint && yarn run check-types && yarn run build"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
@@ -26,6 +21,7 @@
     "next": "12.0.10",
     "next-with-less": "^2.0.5",
     "prettier": "^2.6.2",
+    "rc-virtual-list": "^3.4.8",
     "react": "17.0.2",
     "react-dom": "17.0.2"
   },

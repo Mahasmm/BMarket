@@ -23,8 +23,6 @@ export const AgentDetails = () => {
     getUser();
   }, []);
 
-  // data.map((item) => console.log(item));
-
   return (
     <CompanyLayout title={'Manpower'}>
       <div className={styles.comAgentdetails}>
@@ -32,19 +30,22 @@ export const AgentDetails = () => {
           {data.map((item) => (
             <Col span={8} key={item._id}>
               <div className={styles.agentView}>
-                <Link href={`workersCatagories?id=${item._id}`}>
-                  <Avatar
-                    size={70}
-                    style={{ backgroundColor: '#bcddf3' }}
-                    icon={<UserOutlined style={{ color: '#e48e0b' }} />}
-                  />
-                </Link>
-
-                <h4>
-                  <Link href="">
-                    <a style={{ color: 'black' }}>{item.contactName}</a>
+                <div>
+                  <Link href={`workersCatagories?id=${item._id}`}>
+                    <Avatar
+                      size={70}
+                      style={{ backgroundColor: '#bcddf3' }}
+                      icon={<UserOutlined style={{ color: '#e48e0b' }} />}
+                    />
                   </Link>
-                </h4>
+                </div>
+                <div>
+                  <h4>
+                    <Link href={`workersCatagories?id=${item._id}`}>
+                      <a style={{ color: 'black' }}>{item.contactName}</a>
+                    </Link>
+                  </h4>
+                </div>
               </div>
             </Col>
           ))}

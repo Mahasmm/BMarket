@@ -2,18 +2,28 @@ import React, { FC } from 'react';
 import { Layout } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
 import styles from './AgentLayout.module.less';
+import { useRouter } from 'next/router';
 
 type Props = {
   title: string;
 };
 export const AgentLayout: FC<Props> = (props) => {
+  const history = useRouter();
+
+  const backButton = () => {
+    history.back();
+  };
+
   return (
     <Layout>
       <div className={styles.container}>
         <div className={styles.topView}></div>
         <div className={styles.headerView}>
           <div className={styles.arrowView}>
-            <LeftOutlined style={{ fontSize: '22px', color: '#564F4F' }} />
+            <a onClick={() => backButton()}>
+              <LeftOutlined style={{ fontSize: '22px', color: '#564F4F' }} />
+            </a>
+
             <h3>{props.title}</h3>
           </div>
         </div>
@@ -26,7 +36,7 @@ export const AgentLayout: FC<Props> = (props) => {
           {/* </Col>
           </Row> */}
         </div>
-        <div className={styles.footer}></div>
+        {/* <div className={styles.footer}></div> */}
       </div>
     </Layout>
   );

@@ -1,3 +1,3 @@
-import { WorkerDetails } from './../../page-components/company/ManPower/WorkerDetails';
+import { WorkerCategories } from '../../page-components/company/ManPower/WorkerCategories';
 
-export default WorkerDetails;
+export default WorkerCategories;

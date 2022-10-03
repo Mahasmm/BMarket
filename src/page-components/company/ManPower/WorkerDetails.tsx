@@ -1,58 +1,132 @@
-import React, { useEffect, useState } from 'react';
-import { CompanyLayout } from '../../../layout/CompanyLayout/CompanyLayout';
-import { Avatar, Row, Col } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
-import styles from './CompanyAgent.module.less';
+import { Button, Modal, List, Checkbox } from 'antd';
+import React, { useState, useEffect, ForwardRefRenderFunction, useImperativeHandle } from 'react';
+import VirtualList from 'rc-virtual-list';
 import axios from 'axios';
-import Link from 'next/link';
+import type { CheckboxValueType } from 'antd/es/checkbox/Group';
+import styles from './CompanyAgent.module.less';
 import { useRouter } from 'next/router';
 
-export const WorkerDetails = () => {
-  const [data, setData] = useState<any[]>([]);
-  const history = useRouter();
+export type WorkerDetailsRef = {
+  onVisible: (data: any) => void;
+};
 
-  async function getUser(id: any) {
-    try {
-      const response = await axios.get(`http://localhost:8000/api/b1/worker/cat/${id}`);
-      console.log(response.data.data);
-      setData(response.data.data);
-    } catch (error) {
-      console.error(error);
-    }
+const WorkerDetails: ForwardRefRenderFunction<WorkerDetailsRef> = (props, ref) => {
+  const history = useRouter();
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const ContainerHeight = 400;
+  const [data, setData] = useState<WorkerDetails[]>([]);
+
+  // let [TRating, setTRating] = useState(0);
+  // let rating = 0;
+
+  const onChange = (checkedValues: CheckboxValueType[]) => {
+    console.log('checked = ', checkedValues);
+  };
+
+  interface WorkerDetails {
+    _id: string;
+    contactName: string;
+    vaccine: string;
+    experience: [
+      {
+        _id: string;
+        companyName: string;
+        iRating: number;
+      },
+    ];
+    rating: number;
   }
 
-  useEffect(() => {
-    if (history.isReady) {
-      const { id } = history.query;
-      getUser(id);
+  const appendData = async () => {
+    const response = await axios.get(
+      `http://localhost:8000/api/b1/worker/cat/62e17ab9c4148c3fc08df1f4`,
+    );
+    console.log(response.data.data);
+    // setData(response.data.data);
+  };
+
+  useEffect(() => {}, []);
+
+  // const showModal = () => {
+  //   setIsModalVisible(true);
+  // };
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      onVisible: (data) => {
+        setData(data);
+        setIsModalVisible(true);
+      },
+    }),
+    [],
+  );
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  const onScroll = (e: React.UIEvent<HTMLElement, UIEvent>) => {
+    if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === ContainerHeight) {
+      appendData();
     }
-  }, [history.isReady]);
+  };
 
   return (
-    <CompanyLayout title={'Workers'}>
-      <div className={styles.comAgentdetails}>
-        <Row gutter={24}>
-          {data.map((item) => (
-            <Col key={item._id}>
-              <div className={styles.agentView}>
-                <Link href="companies/home">
-                  <Avatar
-                    size={70}
-                    style={{ backgroundColor: '#bcddf3' }}
-                    icon={<UserOutlined style={{ color: '#e48e0b' }} />}
-                  />
-                </Link>
+    <Modal title="Skilled" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+      <div>
+        <div>
+          <Button type="primary" shape="round">
+            Order
+          </Button>
+        </div>
+        <List>
+          <Checkbox.Group style={{ width: '100%' }} onChange={onChange}>
+            <VirtualList
+              data={data}
+              height={ContainerHeight}
+              itemHeight={47}
+              itemKey="id"
+              onScroll={onScroll}
+            >
+              {(item: WorkerDetails) => (
+                <List.Item key={item._id}>
+                  <div>
+                    <div className={styles.orderSplit}>
+                      <div>
+                        <h3>{item.contactName}</h3>
+                      </div>
+                      <div>
+                        <Checkbox value={item._id}></Checkbox>
+                      </div>
+                    </div>
 
-                <h4>
-                  <Link href="">
-                    <a style={{ color: 'black' }}>{item.contactName}</a>
-                  </Link>
-                </h4>
-              </div>
-            </Col>
-          ))}
-        </Row>
+                    {/* {setTRating(0)} */}
+                    {item.experience.map((exp) => (
+                      <div key={exp._id}>
+                        <div>
+                          <h4>Company Name: {exp.companyName}</h4>
+                        </div>
+                        <div>
+                          <h4>rating: {exp.iRating}</h4>
+                          {/* {setTRating((rating = rating + exp.iRating))} */}
+                        </div>
+                      </div>
+                    ))}
+                    <h4>Total Rating </h4>
+                  </div>
+                </List.Item>
+              )}
+            </VirtualList>
+          </Checkbox.Group>
+        </List>
       </div>
-    </CompanyLayout>
+    </Modal>
   );
 };
+
+export default React.forwardRef<WorkerDetailsRef>(WorkerDetails);
