@@ -18,7 +18,7 @@ export const AgentLayout: FC<Props> = (props) => {
       >
         <AgentNavBar title={props.title} />
         <div className={styles.testdesign}></div>
-        <Content>
+        <Content className={styles.contentSpacing}>
           <article>
             <div>{props.children}</div>
           </article>
