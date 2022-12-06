@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './admin.module.less';
 import { AgentsTable } from './agentsTable';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import Link from 'next/link';
 
 const { Header, Footer, Content } = Layout;
 
@@ -14,11 +15,26 @@ export const agents = () => (
           {' '}
           <span className={styles.brand}>BMarket</span>{' '}
         </Menu.Item>
-        <Menu.Item key="company"> Companies </Menu.Item>
-        <Menu.Item key="agent"> Agents </Menu.Item>
-        <Menu.Item key="worker"> Workers </Menu.Item>
-        <Menu.Item key="machine"> Machineries </Menu.Item>
-        <Menu.Item key="requests"> All Requests </Menu.Item>
+        <Menu.Item key="company">
+          {' '}
+          <Link href="/admin/companies">Companies</Link>{' '}
+        </Menu.Item>
+        <Menu.Item key="agent">
+          {' '}
+          <Link href="/admin/agents">Agents</Link>{' '}
+        </Menu.Item>
+        <Menu.Item key="worker">
+          {' '}
+          <Link href="/admin/agents">Workers</Link>{' '}
+        </Menu.Item>
+        <Menu.Item key="machine">
+          {' '}
+          <Link href="/admin/agents">Machineries</Link>{' '}
+        </Menu.Item>
+        <Menu.Item key="requests">
+          {' '}
+          <Link href="/admin/requests">All Requests</Link>{' '}
+        </Menu.Item>
         <Menu.Item key="logout">
           {' '}
           <Button className={styles.logoutBtn}>Logout</Button>{' '}
