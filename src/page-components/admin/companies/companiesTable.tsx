@@ -2,7 +2,6 @@ import { Space, Table, Button } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import React from 'react';
 import styles from './admin.module.less';
-// import data from './adminData'
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 interface DataType {
@@ -68,26 +67,6 @@ const columns: ColumnsType<DataType> = [
     dataIndex: 'contact',
     key: 'contact',
   },
-  // {
-  //   title: 'Tags',
-  //   key: 'tags',
-  //   dataIndex: 'tags',
-  //   render: (_, { tags }) => (
-  //     <>
-  //       {tags.map(tag => {
-  //         let color = tag.length > 5 ? 'geekblue' : 'green';
-  //         if (tag === 'loser') {
-  //           color = 'volcano';
-  //         }
-  //         return (
-  //           <Tag color={color} key={tag}>
-  //             {tag.toUpperCase()}
-  //           </Tag>
-  //         );
-  //       })}
-  //     </>
-  //   ),
-  // },
   {
     title: 'Action',
     key: 'action',
@@ -104,7 +83,7 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-export const AdminTable = () => (
+export const CompaniesTable = () => (
   <div className={styles.bodyContainer}>
     <Table columns={columns} dataSource={data} />
   </div>

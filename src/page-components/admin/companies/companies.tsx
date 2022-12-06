@@ -1,12 +1,12 @@
 import { Button, Layout, Menu } from 'antd';
 import React from 'react';
 import styles from './admin.module.less';
-import { AdminTable } from './adminTable';
+import { CompaniesTable } from './companiesTable';
 import { PlusCircleOutlined } from '@ant-design/icons';
 
 const { Header, Footer, Content } = Layout;
 
-export const admin = () => (
+export const companies = () => (
   <Layout>
     <Header>
       <Menu mode="horizontal" defaultSelectedKeys={['company']} theme="dark">
@@ -31,7 +31,7 @@ export const admin = () => (
         <Button className={styles.addBtn} icon={<PlusCircleOutlined />}>
           Add new company
         </Button>
-        <AdminTable />
+        <CompaniesTable />
       </Content>
     </body>
 
