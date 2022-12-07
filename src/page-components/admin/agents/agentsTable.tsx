@@ -1,6 +1,6 @@
 import { Space, Table, Button, Modal, Select, Form, Input, InputNumber, DatePicker } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styles from './admin.module.less';
 import { DeleteOutlined, EditOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
@@ -92,7 +92,6 @@ const columns: ColumnsType<DataType> = [
   },
 ];
 
-
 export const AgentsTable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -109,44 +108,43 @@ export const AgentsTable = () => {
   };
 
   return (
-  <>
-  <Button className={styles.addBtn} icon={<PlusCircleOutlined />} onClick={showModal}>
-      Add new agent
-  </Button>
-  <Modal title="Create Agent" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
-      footer={[
-        <Button htmlType="reset">
-          Reset
-        </Button>,
-        <Button htmlType="submit" className={styles.successBtn} onClick={handleOk}>
-          Submit
-        </Button>,
-      ]}
-  >
-    <Form
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 10 }}
-      layout="horizontal"
-    >
-      <Form.Item label="Input">
-        <Input />
-      </Form.Item>
-      <Form.Item label="Select">
-        <Select>
-          <Select.Option value="demo">Demo</Select.Option>
-        </Select>
-      </Form.Item>
-      <Form.Item label="InputNumber">
-        <InputNumber />
-      </Form.Item>
-      <Form.Item label="DatePicker">
-        <DatePicker />
-      </Form.Item>
-    </Form>
-  </Modal>
-  
-  <div className={styles.bodyContainer}>
-    <Table columns={columns} dataSource={data} />
-  </div>
-  </>
-)};
+    <>
+      <Button className={styles.addBtn} icon={<PlusCircleOutlined />} onClick={showModal}>
+        Add new agent
+      </Button>
+      <Modal
+        title="Create Agent"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={[
+          <Button htmlType="reset">Reset</Button>,
+          <Button htmlType="submit" className={styles.successBtn} onClick={handleOk}>
+            Submit
+          </Button>,
+        ]}
+      >
+        <Form labelCol={{ span: 8 }} wrapperCol={{ span: 10 }} layout="horizontal">
+          <Form.Item label="Input">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Select">
+            <Select>
+              <Select.Option value="demo">Demo</Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item label="InputNumber">
+            <InputNumber />
+          </Form.Item>
+          <Form.Item label="DatePicker">
+            <DatePicker />
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      <div className={styles.bodyContainer}>
+        <Table columns={columns} dataSource={data} />
+      </div>
+    </>
+  );
+};

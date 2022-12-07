@@ -100,43 +100,42 @@ export const CompaniesTable = () => {
 
   return (
     <>
-    <Button className={styles.addBtn} icon={<PlusCircleOutlined />} onClick={showModal}>
-      Add new company
-    </Button>
-    <Modal title="Create Company" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}
+      <Button className={styles.addBtn} icon={<PlusCircleOutlined />} onClick={showModal}>
+        Add new company
+      </Button>
+      <Modal
+        title="Create Company"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
         footer={[
-          <Button htmlType="reset">
-            Reset
-          </Button>,
+          <Button htmlType="reset">Reset</Button>,
           <Button htmlType="submit" className={styles.successBtn} onClick={handleOk}>
             Submit
           </Button>,
         ]}
-    >
-      <Form
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 10 }}
-        layout="horizontal"
       >
-        <Form.Item label="Input">
-          <Input />
-        </Form.Item>
-        <Form.Item label="Select">
-          <Select>
-            <Select.Option value="demo">Demo</Select.Option>
-          </Select>
-        </Form.Item>
-        <Form.Item label="InputNumber">
-          <InputNumber />
-        </Form.Item>
-        <Form.Item label="DatePicker">
-          <DatePicker />
-        </Form.Item>
-      </Form>
-    </Modal>
+        <Form labelCol={{ span: 8 }} wrapperCol={{ span: 10 }} layout="horizontal">
+          <Form.Item label="Input">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Select">
+            <Select>
+              <Select.Option value="demo">Demo</Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item label="InputNumber">
+            <InputNumber />
+          </Form.Item>
+          <Form.Item label="DatePicker">
+            <DatePicker />
+          </Form.Item>
+        </Form>
+      </Modal>
 
-    <div className={styles.bodyContainer}>
-      <Table columns={columns} dataSource={data} />
-    </div>
-  </>
-)};
+      <div className={styles.bodyContainer}>
+        <Table columns={columns} dataSource={data} />
+      </div>
+    </>
+  );
+};
