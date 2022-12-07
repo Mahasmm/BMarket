@@ -1,8 +1,7 @@
-import { Button, Layout, Menu } from 'antd';
+import { Button, Layout, Menu, Modal } from 'antd';
 import React from 'react';
 import styles from './admin.module.less';
 import { CompaniesTable } from './companiesTable';
-import { PlusCircleOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 
 const { Header, Footer, Content } = Layout;
@@ -45,11 +44,6 @@ export const companies = () => {
 
       <body>
         <Content>
-          <Link href="/admin/createCompany">
-            <Button className={styles.addBtn} icon={<PlusCircleOutlined />}>
-              Add new company
-            </Button>
-          </Link>
           <CompaniesTable />
         </Content>
       </body>

@@ -2,7 +2,6 @@ import { Button, Layout, Menu } from 'antd';
 import React from 'react';
 import styles from './admin.module.less';
 import { AgentsTable } from './agentsTable';
-import { PlusCircleOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 
 const { Header, Footer, Content } = Layout;
@@ -44,11 +43,6 @@ export const agents = () => (
 
     <body>
       <Content>
-        <Link href="/admin/createAgent">
-          <Button className={styles.addBtn} icon={<PlusCircleOutlined />}>
-            Add new agent
-          </Button>
-        </Link>
         <AgentsTable />
       </Content>
     </body>
