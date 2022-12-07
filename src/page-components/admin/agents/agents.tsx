@@ -23,11 +23,11 @@ export const agents = () => (
           {' '}
           <Link href="/admin/agents">Agents</Link>{' '}
         </Menu.Item>
-        <Menu.Item key="worker">
+        <Menu.Item key="worker" disabled>
           {' '}
           <Link href="/admin/agents">Workers</Link>{' '}
         </Menu.Item>
-        <Menu.Item key="machine">
+        <Menu.Item key="machine" disabled>
           {' '}
           <Link href="/admin/agents">Machineries</Link>{' '}
         </Menu.Item>
@@ -44,9 +44,11 @@ export const agents = () => (
 
     <body>
       <Content>
-        <Button className={styles.addBtn} icon={<PlusCircleOutlined />}>
-          Add new agent
-        </Button>
+        <Link href="/admin/createAgent">
+          <Button className={styles.addBtn} icon={<PlusCircleOutlined />}>
+            Add new agent
+          </Button>
+        </Link>
         <AgentsTable />
       </Content>
     </body>
