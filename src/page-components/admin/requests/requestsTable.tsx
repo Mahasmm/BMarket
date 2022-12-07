@@ -1,32 +1,11 @@
-import { Space, Table, Button } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
-import React, { useState } from 'react';
+import { Space, Button, Row, Col } from 'antd';
+import React from 'react';
 import styles from './admin.module.less';
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { AnyRecord } from 'dns';
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
-interface CompanyDataType {
-  key: string;
-  companyId: string;
-  companyName: string;
-  location: string;
-  contactNo: string;
-  reqDate: string;
-}
-
-interface AgentDataType {
-  key: string;
-  agentId: string;
-  agentName: string;
-  NIC: string;
-  location: string;
-  contactNo: string;
-  reqDate: string;
-}
-
-const companyData: CompanyDataType[] = [
+const companyData = [
   {
-    key: '1',
+    key: '0',
     companyId: '001',
     companyName: 'Ram',
     location: 'Colombo',
@@ -34,7 +13,7 @@ const companyData: CompanyDataType[] = [
     reqDate: '10/11/2022',
   },
   {
-    key: '2',
+    key: '1',
     companyId: '002',
     companyName: 'Azim',
     location: 'Kandy',
@@ -42,7 +21,7 @@ const companyData: CompanyDataType[] = [
     reqDate: '21/10/2022',
   },
   {
-    key: '3',
+    key: '2',
     companyId: '003',
     companyName: 'Chamal',
     location: 'Galle',
@@ -51,50 +30,7 @@ const companyData: CompanyDataType[] = [
   },
 ];
 
-const companyColumns: ColumnsType<CompanyDataType> = [
-  {
-    title: 'Company ID',
-    dataIndex: 'companyId',
-    key: 'agentId',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Company Name',
-    dataIndex: 'companyName',
-    key: 'agentName',
-  },
-  {
-    title: 'Location',
-    dataIndex: 'location',
-    key: 'location',
-  },
-  {
-    title: 'Contact',
-    dataIndex: 'contactNo',
-    key: 'contactNo',
-  },
-  {
-    title: 'Requested Date',
-    dataIndex: 'reqDate',
-    key: 'reqDate',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: () => (
-      <Space size="middle">
-        <Button className={styles.successBtn} icon={<CheckOutlined />}>
-          Accept
-        </Button>
-        <Button className={styles.deleteBtn} icon={<CloseOutlined />}>
-          Decline
-        </Button>
-      </Space>
-    ),
-  },
-];
-
-const agentData: AgentDataType[] = [
+const agentData = [
   {
     key: '1',
     agentId: '001',
@@ -124,66 +60,82 @@ const agentData: AgentDataType[] = [
   },
 ];
 
-const agentColumns: ColumnsType<AgentDataType> = [
-  {
-    title: 'Agent ID',
-    dataIndex: 'agentId',
-    key: 'agentId',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Agent Name',
-    dataIndex: 'agentName',
-    key: 'agentName',
-  },
-  {
-    title: 'NIC',
-    dataIndex: 'NIC',
-    key: 'NIC',
-  },
-  {
-    title: 'Location',
-    dataIndex: 'location',
-    key: 'location',
-  },
-  {
-    title: 'Contact',
-    dataIndex: 'contactNo',
-    key: 'contactNo',
-  },
-  {
-    title: 'Requested Date',
-    dataIndex: 'reqDate',
-    key: 'reqDate',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: () => (
-      <Space size="middle">
-        <Button className={styles.successBtn} icon={<CheckOutlined />}>
-          Accept
-        </Button>
-        <Button className={styles.deleteBtn} icon={<CloseOutlined />}>
-          Decline
-        </Button>
-      </Space>
-    ),
-  },
-];
-
 export const RequestsTable = (props: any) => {
   if (props.visible === 'visible') {
-    console.log('ENTER COMPANY');
     return (
-      <div className={styles.bodyContainer}>
-        <Table columns={companyColumns} dataSource={companyData} />
+      <div className={styles.body}>
+        <Row gutter={[16, 16]} className={styles.tableHead}>
+          <Col span={2}> Company Id </Col>
+          <Col span={6}> Company Name </Col>
+          <Col span={2}> Location </Col>
+          <Col span={4}> Contact </Col>
+          <Col span={4}> Request Date </Col>
+          <Col span={6}> Action </Col>
+        </Row>
+
+        {companyData.map((item) => {
+          return (
+            <>
+              <Row gutter={[16, 16]} className={styles.tableRow}>
+                <Col span={2}> {item.companyId} </Col>
+                <Col span={6}> {item.companyName} </Col>
+                <Col span={2}> {item.location} </Col>
+                <Col span={4}> {item.contactNo} </Col>
+                <Col span={4}> {item.reqDate} </Col>
+                <Col span={6}>
+                  <Space size="middle">
+                    <Button type="primary" icon={<EditOutlined />}>
+                      Edit
+                    </Button>
+                    <Button className={styles.deleteBtn} icon={<DeleteOutlined />}>
+                      Delete
+                    </Button>
+                  </Space>
+                </Col>
+              </Row>
+            </>
+          );
+        })}
       </div>
     );
   }
+
   return (
-    <div className={styles.bodyContainer}>
-      <Table columns={agentColumns} dataSource={agentData} />
+    <div className={styles.body}>
+      <Row gutter={[16, 16]} className={styles.tableHead}>
+        <Col span={2}> Agent Id </Col>
+        <Col span={4}> Agent Name </Col>
+        <Col span={4}> NIC </Col>
+        <Col span={2}> Location </Col>
+        <Col span={4}> Contact </Col>
+        <Col span={4}> Request Date </Col>
+        <Col span={4}> Action </Col>
+      </Row>
+
+      {agentData.map((item) => {
+        return (
+          <>
+            <Row gutter={[16, 16]} className={styles.tableRow}>
+              <Col span={2}> {item.agentId} </Col>
+              <Col span={4}> {item.agentName} </Col>
+              <Col span={4}> {item.NIC} </Col>
+              <Col span={2}> {item.location} </Col>
+              <Col span={4}> {item.contactNo} </Col>
+              <Col span={4}> {item.reqDate} </Col>
+              <Col span={4}>
+                <Space size="middle">
+                  <Button type="primary" icon={<EditOutlined />}>
+                    Edit
+                  </Button>
+                  <Button className={styles.deleteBtn} icon={<DeleteOutlined />}>
+                    Delete
+                  </Button>
+                </Space>
+              </Col>
+            </Row>
+          </>
+        );
+      })}
     </div>
   );
 };

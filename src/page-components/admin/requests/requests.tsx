@@ -52,9 +52,9 @@ export const requests = () => {
         </Menu>
       </Header>
 
-      <body>
+      <body style={{ minHeight: '750px' }}>
         <Content>
-          <Breadcrumb style={{ margin: '30px 50px', float: 'left' }}>
+          <Breadcrumb style={{ margin: '30px 100px', float: 'left' }}>
             <Breadcrumb.Item onClick={clickCompany}>
               <a>Companies</a>
             </Breadcrumb.Item>

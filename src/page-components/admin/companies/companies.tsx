@@ -1,4 +1,4 @@
-import { Button, Layout, Menu, Modal } from 'antd';
+import { Button, Layout, Menu } from 'antd';
 import React from 'react';
 import styles from './admin.module.less';
 import { CompaniesTable } from './companiesTable';
@@ -42,7 +42,7 @@ export const companies = () => {
         </Menu>
       </Header>
 
-      <body>
+      <body style={{ minHeight: '750px' }}>
         <Content>
           <CompaniesTable />
         </Content>

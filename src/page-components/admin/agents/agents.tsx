@@ -41,7 +41,7 @@ export const agents = () => (
       </Menu>
     </Header>
 
-    <body>
+    <body style={{ minHeight: '750px' }}>
       <Content>
         <AgentsTable />
       </Content>

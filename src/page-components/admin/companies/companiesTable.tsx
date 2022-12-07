@@ -1,85 +1,35 @@
-import { Table, Space, Button, Form, Input, Modal, DatePicker, InputNumber, Select } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
+import { Space, Button, Form, Input, Modal, Select, Row, Col } from 'antd';
 import React, { useState } from 'react';
 import styles from './admin.module.less';
 import { DeleteOutlined, EditOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
-interface DataType {
-  key: string;
-  companyId: string;
-  companyName: string;
-  grade: string;
-  location: string;
-  contact: string;
-}
-
-const data: DataType[] = [
+const data = [
   {
-    key: '1',
+    key: '0',
     companyId: '001',
     companyName: 'RD Consultants',
     grade: 'B',
     location: 'Colombo',
     contact: '0112331132',
+    status: true,
   },
   {
-    key: '2',
+    key: '1',
     companyId: '002',
     companyName: 'RDA',
     grade: 'B',
     location: 'Colombo',
     contact: '0112331132',
+    status: true,
   },
   {
-    key: '3',
+    key: '2',
     companyId: '003',
     companyName: 'Maga Engineering',
     grade: 'A',
     location: 'Nawala',
     contact: '0112331132',
-  },
-];
-
-const columns: ColumnsType<DataType> = [
-  {
-    title: 'Company ID',
-    dataIndex: 'companyId',
-    key: 'companyId',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Company Name',
-    dataIndex: 'companyName',
-    key: 'companyName',
-  },
-  {
-    title: 'Grade',
-    dataIndex: 'grade',
-    key: 'grade',
-  },
-  {
-    title: 'Location',
-    dataIndex: 'location',
-    key: 'location',
-  },
-  {
-    title: 'Contact',
-    dataIndex: 'contact',
-    key: 'contact',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: () => (
-      <Space size="middle">
-        <Button type="primary" icon={<EditOutlined />}>
-          Edit
-        </Button>
-        <Button className={styles.deleteBtn} icon={<DeleteOutlined />}>
-          Delete
-        </Button>
-      </Space>
-    ),
+    status: true,
   },
 ];
 
@@ -109,32 +59,68 @@ export const CompaniesTable = () => {
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[
-          <Button htmlType="reset">Reset</Button>,
-          <Button htmlType="submit" className={styles.successBtn} onClick={handleOk}>
+          <Button key="reset" htmlType="reset">
+            Reset
+          </Button>,
+          <Button key="submit" htmlType="submit" className={styles.successBtn} onClick={handleOk}>
             Submit
           </Button>,
         ]}
       >
         <Form labelCol={{ span: 8 }} wrapperCol={{ span: 10 }} layout="horizontal">
-          <Form.Item label="Input">
+          <Input name="companyId" value="004" hidden />
+          <Form.Item label="Company name">
             <Input />
           </Form.Item>
-          <Form.Item label="Select">
+          <Form.Item label="Grade">
             <Select>
-              <Select.Option value="demo">Demo</Select.Option>
+              <Select.Option value="A">A</Select.Option>
+              <Select.Option value="B">B</Select.Option>
+              <Select.Option value="C">C</Select.Option>
             </Select>
           </Form.Item>
-          <Form.Item label="InputNumber">
-            <InputNumber />
+          <Form.Item label="Location">
+            <Input />
           </Form.Item>
-          <Form.Item label="DatePicker">
-            <DatePicker />
+          <Form.Item label="Contact number">
+            <Input />
           </Form.Item>
         </Form>
       </Modal>
 
-      <div className={styles.bodyContainer}>
-        <Table columns={columns} dataSource={data} />
+      <div className={styles.body}>
+        <Row gutter={[16, 16]} className={styles.tableHead}>
+          <Col span={2}> Company Id </Col>
+          <Col span={6}> Company Name </Col>
+          <Col span={2}> Grade </Col>
+          <Col span={4}> Location </Col>
+          <Col span={4}> Contact </Col>
+          <Col span={6}> Action </Col>
+        </Row>
+
+        {data.map((item) => {
+          return (
+            <>
+              <Row gutter={[16, 16]} className={styles.tableRow}>
+                <Col span={2}> {item.companyId} </Col>
+                <Col span={6}> {item.companyName} </Col>
+                <Col span={2}> {item.grade} </Col>
+                <Col span={4}> {item.location} </Col>
+                <Col span={4}> {item.contact} </Col>
+                <Col span={6}>
+                  <Space size="middle">
+                    <Button type="primary" icon={<EditOutlined />}>
+                      Edit
+                    </Button>
+                    <Button className={styles.deleteBtn} icon={<DeleteOutlined />}>
+                      Delete
+                    </Button>
+                  </Space>
+                </Col>
+              </Row>
+            </>
+          );
+        })}
       </div>
     </>
   );

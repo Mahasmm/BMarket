@@ -1,22 +1,11 @@
-import { Space, Table, Button, Modal, Select, Form, Input, InputNumber, DatePicker } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
+import { Space, Button, Modal, Form, Input, InputNumber, Row, Col } from 'antd';
 import React, { useState } from 'react';
 import styles from './admin.module.less';
 import { DeleteOutlined, EditOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
-interface DataType {
-  key: string;
-  agentId: string;
-  agentName: string;
-  NIC: string;
-  location: string;
-  contactNo: string;
-  workersCount: number;
-}
-
-const data: DataType[] = [
+const data = [
   {
-    key: '1',
+    key: '0',
     agentId: '001',
     agentName: 'Ram',
     NIC: '9626429884V',
@@ -25,7 +14,7 @@ const data: DataType[] = [
     workersCount: 10,
   },
   {
-    key: '2',
+    key: '1',
     agentId: '002',
     agentName: 'Azim',
     NIC: '8926421114V',
@@ -34,61 +23,13 @@ const data: DataType[] = [
     workersCount: 5,
   },
   {
-    key: '3',
+    key: '2',
     agentId: '003',
     agentName: 'Chamal',
     NIC: '9111429884V',
     location: 'Galle',
     contactNo: '0714356564',
     workersCount: 7,
-  },
-];
-
-const columns: ColumnsType<DataType> = [
-  {
-    title: 'Agent ID',
-    dataIndex: 'agentId',
-    key: 'agentId',
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: 'Agent Name',
-    dataIndex: 'agentName',
-    key: 'agentName',
-  },
-  {
-    title: 'NIC',
-    dataIndex: 'NIC',
-    key: 'NIC',
-  },
-  {
-    title: 'Location',
-    dataIndex: 'location',
-    key: 'location',
-  },
-  {
-    title: 'Contact',
-    dataIndex: 'contactNo',
-    key: 'contactNo',
-  },
-  {
-    title: 'Available workers',
-    dataIndex: 'workersCount',
-    key: 'workersCount',
-  },
-  {
-    title: 'Action',
-    key: 'action',
-    render: () => (
-      <Space size="middle">
-        <Button type="primary" icon={<EditOutlined />}>
-          Edit
-        </Button>
-        <Button className={styles.deleteBtn} icon={<DeleteOutlined />}>
-          Delete
-        </Button>
-      </Space>
-    ),
   },
 ];
 
@@ -118,32 +59,69 @@ export const AgentsTable = () => {
         onOk={handleOk}
         onCancel={handleCancel}
         footer={[
-          <Button htmlType="reset">Reset</Button>,
-          <Button htmlType="submit" className={styles.successBtn} onClick={handleOk}>
+          <Button key="reset" htmlType="reset">
+            Reset
+          </Button>,
+          <Button key="submit" htmlType="submit" className={styles.successBtn} onClick={handleOk}>
             Submit
           </Button>,
         ]}
       >
         <Form labelCol={{ span: 8 }} wrapperCol={{ span: 10 }} layout="horizontal">
-          <Form.Item label="Input">
+          <Input name="agentId" value="004" hidden />
+          <Form.Item label="Agent name">
             <Input />
           </Form.Item>
-          <Form.Item label="Select">
-            <Select>
-              <Select.Option value="demo">Demo</Select.Option>
-            </Select>
+          <Form.Item label="NIC">
+            <Input />
           </Form.Item>
-          <Form.Item label="InputNumber">
+          <Form.Item label="Location">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Contact number">
+            <Input />
+          </Form.Item>
+          <Form.Item label="Available workers">
             <InputNumber />
-          </Form.Item>
-          <Form.Item label="DatePicker">
-            <DatePicker />
           </Form.Item>
         </Form>
       </Modal>
 
-      <div className={styles.bodyContainer}>
-        <Table columns={columns} dataSource={data} />
+      <div className={styles.body}>
+        <Row gutter={[16, 16]} className={styles.tableHead}>
+          <Col span={2}> Agent Id </Col>
+          <Col span={4}> Agent Name </Col>
+          <Col span={4}> NIC </Col>
+          <Col span={2}> Location </Col>
+          <Col span={4}> Contact </Col>
+          <Col span={4}> Available workers </Col>
+          <Col span={4}> Action </Col>
+        </Row>
+
+        {data.map((item) => {
+          return (
+            <>
+              <Row gutter={[16, 16]} className={styles.tableRow}>
+                <Col span={2}> {item.agentId} </Col>
+                <Col span={4}> {item.agentName} </Col>
+                <Col span={4}> {item.NIC} </Col>
+                <Col span={2}> {item.location} </Col>
+                <Col span={4}> {item.contactNo} </Col>
+                <Col span={4}> {item.workersCount} </Col>
+                <Col span={4}>
+                  <Space size="middle">
+                    <Button type="primary" icon={<EditOutlined />}>
+                      Edit
+                    </Button>
+                    <Button className={styles.deleteBtn} icon={<DeleteOutlined />}>
+                      Delete
+                    </Button>
+                  </Space>
+                </Col>
+              </Row>
+            </>
+          );
+        })}
       </div>
     </>
   );
