@@ -23,14 +23,6 @@ export const companies = () => {
             {' '}
             <Link href="/admin/agents">Agents</Link>{' '}
           </Menu.Item>
-          <Menu.Item key="worker" disabled>
-            {' '}
-            <Link href="/admin/companies">Workers</Link>{' '}
-          </Menu.Item>
-          <Menu.Item key="machine" disabled>
-            {' '}
-            <Link href="/admin/companies">Machineries</Link>{' '}
-          </Menu.Item>
           <Menu.Item key="requests">
             {' '}
             <Link href="/admin/requests">All Requests</Link>{' '}

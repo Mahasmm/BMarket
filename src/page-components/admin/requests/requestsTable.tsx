@@ -1,71 +1,103 @@
 import { Space, Button, Row, Col } from 'antd';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './admin.module.less';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 
 const companyData = [
   {
     key: '0',
-    companyId: '001',
-    companyName: 'Ram',
-    location: 'Colombo',
-    contactNo: '0777556644',
-    reqDate: '10/11/2022',
+    companyId: '01',
+    companyName: 'Invicta',
+    location: 'Jaffna',
+    contactNo: '0748734143',
+    reqDate: '24/10/2022',
+    approval: "approve",
   },
   {
     key: '1',
-    companyId: '002',
-    companyName: 'Azim',
-    location: 'Kandy',
-    contactNo: '0727776611',
-    reqDate: '21/10/2022',
-  },
-  {
-    key: '2',
-    companyId: '003',
-    companyName: 'Chamal',
+    companyId: '02',
+    companyName: 'Mithra enterprise',
     location: 'Galle',
-    contactNo: '0714356564',
+    contactNo: '0769726789',
     reqDate: '02/12/2022',
-  },
+    approval: "",
+  }
 ];
 
 const agentData = [
   {
-    key: '1',
-    agentId: '001',
-    agentName: 'Ram',
-    NIC: '9626429884V',
+    key: '0',
+    agentId: '01',
+    agentName: 'Raj Mohan',
+    NIC: '653486598V',
     location: 'Colombo',
-    contactNo: '0777556644',
-    reqDate: '10/11/2022',
+    contactNo: '0763578907',
+    reqDate: '29/10/2022',
+    approval: "approve"
+  },
+  {
+    key: '1',
+    agentId: '02',
+    agentName: 'Ajith',
+    NIC: '943245162V',
+    location: 'Kandy',
+    contactNo: '0786754321',
+    reqDate: '16/11/2022',
+    approval: "",
   },
   {
     key: '2',
-    agentId: '002',
+    agentId: '03',
     agentName: 'Azim',
     NIC: '8926421114V',
     location: 'Kandy',
-    contactNo: '0727776611',
-    reqDate: '21/10/2022',
-  },
-  {
-    key: '3',
-    agentId: '003',
-    agentName: 'Chamal',
-    NIC: '9111429884V',
-    location: 'Galle',
-    contactNo: '0714356564',
-    reqDate: '02/12/2022',
+    contactNo: '0726547353',
+    reqDate: '21/12/2022',
+    approval: "",
   },
 ];
 
 export const RequestsTable = (props: any) => {
+  const [compItems, setCompItems] = useState(companyData);
+  const [agentItems, setAgentItems] = useState(agentData);
+  const [id,setId] = useState(0);
+  let compData: any;
+  let agData: any;
+
+  const turnCompApprove = (value: any) => {
+    console.log("key ", value.key);
+    compItems[value.key].approval = "approve";
+    setCompItems(compItems);
+    console.log("approve", compData[value.key]);
+  }
+
+  const turnCompReject = (value: any) => {
+    compItems[value.key].approval = "reject";
+    setCompItems(compItems);
+    console.log("approve", compItems[value.key]);
+  }
+
+  const turnAgentApprove = (value: any) => {
+    setId(value.key)
+    agentItems[value.key].approval = "approve";
+    setAgentItems(agentItems);
+    console.log("approve", agentItems[value.key]);
+  }
+
+  const turnAgentReject = (value: any) => {
+    setId(value.key)
+    agentItems[value.key].approval = "reject";
+    setAgentItems(agentItems);
+    console.log("approve", agentItems[value.key]);
+  }
+
+  useEffect(()=>{},[]);
+
   if (props.visible === 'visible') {
     return (
       <div className={styles.body}>
         <Row gutter={[16, 16]} className={styles.tableHead}>
-          <Col span={2}> Company Id </Col>
+          <Col span={2}> No </Col>
           <Col span={6}> Company Name </Col>
           <Col span={2}> Location </Col>
           <Col span={4}> Contact </Col>
@@ -73,7 +105,7 @@ export const RequestsTable = (props: any) => {
           <Col span={6}> Action </Col>
         </Row>
 
-        {companyData.map((item) => {
+        {compData = compItems.map((item) => {
           return (
             <>
               <Row gutter={[16, 16]} className={styles.tableRow}>
@@ -83,14 +115,18 @@ export const RequestsTable = (props: any) => {
                 <Col span={4}> {item.contactNo} </Col>
                 <Col span={4}> {item.reqDate} </Col>
                 <Col span={6}>
-                  <Space size="middle">
-                    <Button type="primary" icon={<EditOutlined />}>
-                      Edit
-                    </Button>
-                    <Button className={styles.deleteBtn} icon={<DeleteOutlined />}>
-                      Delete
-                    </Button>
-                  </Space>
+                  {item.approval == "approve" ? (<span>Accepted</span>)
+                  : item.approval == "reject" ? (<span>Rejected</span>)
+                  : (
+                    <Space size="middle">
+                      <Button onClick={() => turnCompApprove(item)} className={styles.successBtn} icon={<CheckOutlined />}>
+                        Accept
+                      </Button>
+                      <Button onClick={() => turnCompReject(item)}className={styles.deleteBtn} icon={<CloseOutlined />}>
+                        Decline
+                      </Button>
+                    </Space>
+                  )}
                 </Col>
               </Row>
             </>
@@ -103,16 +139,16 @@ export const RequestsTable = (props: any) => {
   return (
     <div className={styles.body}>
       <Row gutter={[16, 16]} className={styles.tableHead}>
-        <Col span={2}> Agent Id </Col>
+        <Col span={2}> No </Col>
         <Col span={4}> Agent Name </Col>
-        <Col span={4}> NIC </Col>
+        <Col span={4}> NIC </Col> 
         <Col span={2}> Location </Col>
         <Col span={4}> Contact </Col>
         <Col span={4}> Request Date </Col>
         <Col span={4}> Action </Col>
       </Row>
 
-      {agentData.map((item) => {
+      {agData = agentItems.map((item) => {
         return (
           <>
             <Row gutter={[16, 16]} className={styles.tableRow}>
@@ -123,14 +159,18 @@ export const RequestsTable = (props: any) => {
               <Col span={4}> {item.contactNo} </Col>
               <Col span={4}> {item.reqDate} </Col>
               <Col span={4}>
-                <Space size="middle">
-                  <Button type="primary" icon={<EditOutlined />}>
-                    Edit
-                  </Button>
-                  <Button className={styles.deleteBtn} icon={<DeleteOutlined />}>
-                    Delete
-                  </Button>
-                </Space>
+                {item.approval == "approve" ? (<span>Accepted</span>)
+                  : item.approval == "reject" ? (<span>Rejected</span>)
+                  : (
+                    <Space size="middle">
+                      <Button onClick={() => turnAgentApprove(item)} className={styles.successBtn} icon={<CheckOutlined />}>
+                        Accept
+                      </Button>
+                      <Button onClick={() => turnAgentReject(item)}className={styles.deleteBtn} icon={<CloseOutlined />}>
+                        Decline
+                      </Button>
+                    </Space>
+                  )}
               </Col>
             </Row>
           </>
