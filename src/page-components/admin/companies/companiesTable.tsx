@@ -4,17 +4,18 @@ import styles from './admin.module.less';
 import { DeleteOutlined, EditOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 const data = {
-  sam: [{
-    key: '0',
-    companyId: '01',
-    companyName: 'Invicta',
-    grade: 'A',
-    location: 'Jaffna',
-    contact: '0748734143',
-    status: true,
-  }]
+  sam: [
+    {
+      key: '0',
+      companyId: '01',
+      companyName: 'Invicta',
+      grade: 'A',
+      location: 'Jaffna',
+      contact: '0748734143',
+      status: true,
+    },
+  ],
 };
-
 
 export const CompaniesTable = () => {
   const [form] = Form.useForm();
@@ -39,69 +40,69 @@ export const CompaniesTable = () => {
   const [items, setItems] = useState(data);
   let upData: any;
 
-  useEffect(()=>{
-    console.log("ENTER ", items);
-  },[items]);
+  useEffect(() => {
+    console.log('ENTER ', items);
+  }, [items]);
 
-  const [id,setId] = useState(0);
-  const [name,setName] = useState("");
-  const [loc,setLoc] = useState("");
-  const [grd,setGrd] = useState("");
-  const [cont,setCont] = useState("");
-  
+  const [id, setId] = useState(0);
+  const [name, setName] = useState('');
+  const [loc, setLoc] = useState('');
+  const [grd, setGrd] = useState('');
+  const [cont, setCont] = useState('');
+
   const turnFalse = (value: any) => {
     console.log('status ', value);
-    alert("Do you want to delete?")
-    console.log("Before ", items.sam[value]); 
+    alert('Do you want to delete?');
+    console.log('Before ', items.sam[value]);
     items.sam[value].status = false;
     // console.log('item ', items.sam[value]);
     setItems(items);
-    console.log("After ", items.sam[value]);
-  }
+    console.log('After ', items.sam[value]);
+  };
 
   const Submit = () => {
-    console.log('company ',name);
-    console.log('item ',items.sam[id]);
+    console.log('company ', name);
+    console.log('item ', items.sam[id]);
     items.sam[id].companyName = name;
-    items.sam[id].location = loc; 
+    items.sam[id].location = loc;
     items.sam[id].grade = grd;
     items.sam[id].contact = cont;
     handleSubmitCancel();
-  }
-  
-  const Edit = (id:any) => {
+  };
+
+  const Edit = (id: any) => {
     showEditModal();
     setId(id);
-  }
+  };
 
   const Save = () => {
     items.sam.concat({
-      "key": "1",
-      "companyId": "02",
-      "companyName": name,
-      "grade": grd,
-      "location": loc,
-      "contact": cont,
-      "status": true
-    })
+      key: '1',
+      companyId: '02',
+      companyName: name,
+      grade: grd,
+      location: loc,
+      contact: cont,
+      status: true,
+    });
     setId(items.sam.length);
-    console.log("item ", id)
+    console.log('item ', id);
     handleCancel();
-  }
+  };
 
   const initialData = () => {
     setId(items.sam.length);
-    console.log("key ", items.sam.length);
-    items.sam[items.sam.length]= {
-      "key": "",
-      "companyId": "",
-      "companyName": "",
-      "grade": "",
-      "location": "",
-      "contact": "",
-      "status": true
+    console.log('key ', items.sam.length);
+    items.sam[items.sam.length] = {
+      key: '',
+      companyId: '',
+      companyName: '',
+      grade: '',
+      location: '',
+      contact: '',
+      status: true,
     };
-  }
+  };
 
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -116,7 +117,6 @@ export const CompaniesTable = () => {
   const handleSubmitCancel = () => {
     setIsEditModalOpen(false);
   };
-
 
   return (
     <>
@@ -134,22 +134,22 @@ export const CompaniesTable = () => {
         <Form form={form} labelCol={{ span: 8 }} wrapperCol={{ span: 10 }} layout="horizontal">
           <Input name="companyId" value="04" hidden />
           <Form.Item label="Company name">
-            <Input onChange={(e)=>setName(e.target.value)} type="text" />
+            <Input onChange={(e) => setName(e.target.value)} type="text" />
           </Form.Item>
           <Form.Item label="Grade">
-            <Select onChange={(e)=>setGrd(e)}>
+            <Select onChange={(e) => setGrd(e)}>
               <Select.Option value="A">A</Select.Option>
               <Select.Option value="B">B</Select.Option>
               <Select.Option value="C">C</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item label="Location">
-            <Input onChange={(e)=>setLoc(e.target.value)} type="text" />
+            <Input onChange={(e) => setLoc(e.target.value)} type="text" />
           </Form.Item>
           <Form.Item label="Contact number">
-            <Input onChange={(e)=>setCont(e.target.value)} type="text"/>
+            <Input onChange={(e) => setCont(e.target.value)} type="text" />
           </Form.Item>
-          <Space size="middle" style={{clear: "both",float: "right"}}>
+          <Space size="middle" style={{ clear: 'both', float: 'right' }}>
             <Button key="reset" onClick={onReset} htmlType="reset">
               Reset
             </Button>
@@ -159,7 +159,6 @@ export const CompaniesTable = () => {
           </Space>
         </Form>
       </Modal>
-
 
       <div className={styles.body}>
         <Row gutter={[16, 16]} className={styles.tableHead}>
@@ -171,8 +170,8 @@ export const CompaniesTable = () => {
           <Col span={6}> Action </Col>
         </Row>
 
-        {items.sam.map((item) => (
-          item.status === true ?  (            
+        {items.sam.map((item) =>
+          item.status === true ? (
             <>
               <Row gutter={[16, 16]} className={styles.tableRow}>
                 <Col span={2}> {item.companyId} </Col>
@@ -182,19 +181,22 @@ export const CompaniesTable = () => {
                 <Col span={4}> {item.contact} </Col>
                 <Col span={6}>
                   <Space size="middle">
-                    <Button onClick={()=>Edit(item.key)} type="primary" icon={<EditOutlined />}>
+                    <Button onClick={() => Edit(item.key)} type="primary" icon={<EditOutlined />}>
                       Edit
                     </Button>
-                    <Button onClick={()=> turnFalse(item.key)} className={styles.deleteBtn} icon={<DeleteOutlined />}>
+                    <Button
+                      onClick={() => turnFalse(item.key)}
+                      className={styles.deleteBtn}
+                      icon={<DeleteOutlined />}
+                    >
                       Delete
                     </Button>
                   </Space>
                 </Col>
               </Row>
-            </>            
-          ):null
-        ))
-        } 
+            </>
+          ) : null,
+        )}
       </div>
 
       <Modal
@@ -204,24 +206,33 @@ export const CompaniesTable = () => {
         onCancel={handleSubmitCancel}
         footer={[]}
       >
-        <Form onFinish={Submit} form={form} labelCol={{ span: 8 }} wrapperCol={{ span: 10 }} layout="horizontal">
+        <Form
+          onFinish={Submit}
+          form={form}
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 10 }}
+          layout="horizontal"
+        >
           <Form.Item label="Company name">
-            <Input onChange={(e)=>setName(e.target.value)} placeholder={items.sam[id].companyName} />
+            <Input
+              onChange={(e) => setName(e.target.value)}
+              placeholder={items.sam[id].companyName}
+            />
           </Form.Item>
           <Form.Item label="Grade">
-            <Select onChange={(e)=>setGrd(e)} placeholder={items.sam[id].grade}>
+            <Select onChange={(e) => setGrd(e)} placeholder={items.sam[id].grade}>
               <Select.Option value="A">A</Select.Option>
               <Select.Option value="B">B</Select.Option>
               <Select.Option value="C">C</Select.Option>
             </Select>
           </Form.Item>
           <Form.Item label="Location">
-            <Input onChange={(e)=>setLoc(e.target.value)} placeholder={items.sam[id].location} />
+            <Input onChange={(e) => setLoc(e.target.value)} placeholder={items.sam[id].location} />
           </Form.Item>
           <Form.Item label="Contact number">
-            <Input onChange={(e)=>setCont(e.target.value)} placeholder={items.sam[id].contact} />
+            <Input onChange={(e) => setCont(e.target.value)} placeholder={items.sam[id].contact} />
           </Form.Item>
-          <Space size="middle" style={{clear: "both",float: "right"}}>
+          <Space size="middle" style={{ clear: 'both', float: 'right' }}>
             <Button key="reset" onClick={onReset} htmlType="reset">
               Reset
             </Button>

@@ -4,26 +4,28 @@ import styles from './admin.module.less';
 import { DeleteOutlined, EditOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
 const data = {
-  sam:[{
-    key: '0',
-    agentId: '01',
-    agentName: 'Raj Mohan',
-    NIC: '653486598V',
-    location: 'Colombo',
-    contactNo: '0763578907',
-    workersCount: 0,
-    status: true
-  },
-  {
-    key: '1',
-    agentId: '02',
-    agentName: 'Ajith',
-    NIC: '943245162V',
-    location: 'Kandy',
-    contactNo: '0786754321',
-    workersCount: 4,
-    status: true
-  }]
+  sam: [
+    {
+      key: '0',
+      agentId: '01',
+      agentName: 'Raj Mohan',
+      NIC: '653486598V',
+      location: 'Colombo',
+      contactNo: '0763578907',
+      workersCount: 0,
+      status: true,
+    },
+    {
+      key: '1',
+      agentId: '02',
+      agentName: 'Ajith',
+      NIC: '943245162V',
+      location: 'Kandy',
+      contactNo: '0786754321',
+      workersCount: 4,
+      status: true,
+    },
+  ],
 };
 
 export const AgentsTable = () => {
@@ -55,37 +57,37 @@ export const AgentsTable = () => {
     setIsEditModalOpen(false);
   };
 
-  const [id,setId] = useState(0);
-  const [name,setName] = useState("");
-  const [loc,setLoc] = useState("");
-  const [nic,setNic] = useState("");
-  const [count,setCount] = useState(0);
-  const [cont,setCont] = useState("");
+  const [id, setId] = useState(0);
+  const [name, setName] = useState('');
+  const [loc, setLoc] = useState('');
+  const [nic, setNic] = useState('');
+  const [count, setCount] = useState(0);
+  const [cont, setCont] = useState('');
   const [items, setItems] = useState(data);
-  
+
   const turnFalse = (value: any) => {
     console.log('status ', value);
-    alert("Do you want to delete?")
-    console.log("Before ", items.sam[value]); 
+    alert('Do you want to delete?');
+    console.log('Before ', items.sam[value]);
     items.sam[value].status = false;
     // console.log('item ', items.sam[value]);
     setItems(items);
-    console.log("After ", items.sam[value]);
-  }
+    console.log('After ', items.sam[value]);
+  };
 
   const Submit = () => {
     items.sam[id].agentName = name;
-    items.sam[id].location = loc; 
+    items.sam[id].location = loc;
     items.sam[id].NIC = nic;
     items.sam[id].contactNo = cont;
     items.sam[id].workersCount = count;
     handleSubmitCancel();
-  }
-  
-  const Edit = (id:any) => {
+  };
+
+  const Edit = (id: any) => {
     showEditModal();
     setId(id);
-  }
+  };
 
   return (
     <>
@@ -109,13 +111,13 @@ export const AgentsTable = () => {
         <Form labelCol={{ span: 8 }} wrapperCol={{ span: 10 }} layout="horizontal">
           <Input name="agentId" value="04" hidden />
           <Form.Item label="Agent name">
-            <Input type="text"/>
+            <Input type="text" />
           </Form.Item>
           <Form.Item label="NIC">
-            <Input type="text"/>
+            <Input type="text" />
           </Form.Item>
           <Form.Item label="Location">
-            <Input type="text"/>
+            <Input type="text" />
           </Form.Item>
           <Form.Item label="Contact number">
             <Input type="text" />
@@ -149,10 +151,14 @@ export const AgentsTable = () => {
                 <Col span={4}> {item.workersCount} </Col>
                 <Col span={4}>
                   <Space size="middle">
-                    <Button onClick={()=>Edit(item.key)} type="primary" icon={<EditOutlined />}>
+                    <Button onClick={() => Edit(item.key)} type="primary" icon={<EditOutlined />}>
                       Edit
                     </Button>
-                    <Button onClick={()=> turnFalse(item.key)} className={styles.deleteBtn} icon={<DeleteOutlined />}>
+                    <Button
+                      onClick={() => turnFalse(item.key)}
+                      className={styles.deleteBtn}
+                      icon={<DeleteOutlined />}
+                    >
                       Delete
                     </Button>
                   </Space>
@@ -169,22 +175,27 @@ export const AgentsTable = () => {
         onCancel={handleSubmitCancel}
         footer={[]}
       >
-        <Form onFinish={Submit} labelCol={{ span: 8 }} wrapperCol={{ span: 10 }} layout="horizontal">
+        <Form
+          onFinish={Submit}
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 10 }}
+          layout="horizontal"
+        >
           <Input name="agentId" value="04" hidden />
           <Form.Item label="Agent name">
-            <Input type="text" placeholder={items.sam[id].agentName}/>
+            <Input type="text" placeholder={items.sam[id].agentName} />
           </Form.Item>
           <Form.Item label="NIC">
-            <Input type="text" placeholder={items.sam[id].NIC}/>
+            <Input type="text" placeholder={items.sam[id].NIC} />
           </Form.Item>
           <Form.Item label="Location">
-            <Input type="text" placeholder={items.sam[id].location}/>
+            <Input type="text" placeholder={items.sam[id].location} />
           </Form.Item>
           <Form.Item label="Contact number">
-            <Input type="text" placeholder={items.sam[id].contactNo}/>
+            <Input type="text" placeholder={items.sam[id].contactNo} />
           </Form.Item>
           <Form.Item label="Available workers">
-            <InputNumber value={items.sam[id].workersCount}/>
+            <InputNumber value={items.sam[id].workersCount} />
           </Form.Item>
         </Form>
       </Modal>
