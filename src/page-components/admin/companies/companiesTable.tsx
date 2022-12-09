@@ -29,16 +29,11 @@ export const CompaniesTable = () => {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
   const handleCancel = () => {
     setIsModalOpen(false);
   };
 
   const [items, setItems] = useState(data);
-  let upData: any;
 
   useEffect(() => {
     console.log('ENTER ', items);
@@ -55,12 +50,11 @@ export const CompaniesTable = () => {
     alert('Do you want to delete?');
     console.log('Before ', items.sam[value]);
     items.sam[value].status = false;
-    // console.log('item ', items.sam[value]);
     setItems(items);
     console.log('After ', items.sam[value]);
   };
 
-  const Submit = () => {
+  const submit = () => {
     console.log('company ', name);
     console.log('item ', items.sam[id]);
     items.sam[id].companyName = name;
@@ -70,12 +64,12 @@ export const CompaniesTable = () => {
     handleSubmitCancel();
   };
 
-  const Edit = (id: any) => {
+  const edit = (id: any) => {
     showEditModal();
     setId(id);
   };
 
-  const Save = () => {
+  const save = () => {
     items.sam.concat({
       key: '1',
       companyId: '02',
@@ -90,28 +84,10 @@ export const CompaniesTable = () => {
     handleCancel();
   };
 
-  const initialData = () => {
-    setId(items.sam.length);
-    console.log('key ', items.sam.length);
-    items.sam[items.sam.length] = {
-      key: '',
-      companyId: '',
-      companyName: '',
-      grade: '',
-      location: '',
-      contact: '',
-      status: true,
-    };
-  };
-
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const showEditModal = () => {
     setIsEditModalOpen(true);
-  };
-
-  const handleEditSubmit = () => {
-    setIsEditModalOpen(false);
   };
 
   const handleSubmitCancel = () => {
@@ -127,7 +103,7 @@ export const CompaniesTable = () => {
       <Modal
         title="Create Company"
         open={isModalOpen}
-        onOk={Save}
+        onOk={save}
         onCancel={handleCancel}
         footer={[]}
       >
@@ -153,7 +129,7 @@ export const CompaniesTable = () => {
             <Button key="reset" onClick={onReset} htmlType="reset">
               Reset
             </Button>
-            <Button key="submit" htmlType="submit" className={styles.successBtn} onClick={Save}>
+            <Button key="submit" htmlType="submit" className={styles.successBtn} onClick={save}>
               Submit
             </Button>
           </Space>
@@ -181,7 +157,7 @@ export const CompaniesTable = () => {
                 <Col span={4}> {item.contact} </Col>
                 <Col span={6}>
                   <Space size="middle">
-                    <Button onClick={() => Edit(item.key)} type="primary" icon={<EditOutlined />}>
+                    <Button onClick={() => edit(item.key)} type="primary" icon={<EditOutlined />}>
                       Edit
                     </Button>
                     <Button
@@ -202,12 +178,12 @@ export const CompaniesTable = () => {
       <Modal
         title="Edit Company"
         open={isEditModalOpen}
-        onOk={Submit}
+        onOk={submit}
         onCancel={handleSubmitCancel}
         footer={[]}
       >
         <Form
-          onFinish={Submit}
+          onFinish={submit}
           form={form}
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 10 }}
@@ -236,7 +212,7 @@ export const CompaniesTable = () => {
             <Button key="reset" onClick={onReset} htmlType="reset">
               Reset
             </Button>
-            <Button key="submit" htmlType="submit" className={styles.successBtn} onClick={Submit}>
+            <Button key="submit" htmlType="submit" className={styles.successBtn} onClick={submit}>
               Submit
             </Button>
           </Space>

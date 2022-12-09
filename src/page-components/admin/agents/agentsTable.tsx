@@ -49,10 +49,6 @@ export const AgentsTable = () => {
     setIsEditModalOpen(true);
   };
 
-  const handleEditSubmit = () => {
-    setIsEditModalOpen(false);
-  };
-
   const handleSubmitCancel = () => {
     setIsEditModalOpen(false);
   };
@@ -61,7 +57,7 @@ export const AgentsTable = () => {
   const [name, setName] = useState('');
   const [loc, setLoc] = useState('');
   const [nic, setNic] = useState('');
-  const [count, setCount] = useState(0);
+  const [count] = useState(0);
   const [cont, setCont] = useState('');
   const [items, setItems] = useState(data);
 
@@ -70,12 +66,11 @@ export const AgentsTable = () => {
     alert('Do you want to delete?');
     console.log('Before ', items.sam[value]);
     items.sam[value].status = false;
-    // console.log('item ', items.sam[value]);
     setItems(items);
     console.log('After ', items.sam[value]);
   };
 
-  const Submit = () => {
+  const submit = () => {
     items.sam[id].agentName = name;
     items.sam[id].location = loc;
     items.sam[id].NIC = nic;
@@ -84,7 +79,7 @@ export const AgentsTable = () => {
     handleSubmitCancel();
   };
 
-  const Edit = (id: any) => {
+  const edit = (id: any) => {
     showEditModal();
     setId(id);
   };
@@ -151,7 +146,7 @@ export const AgentsTable = () => {
                 <Col span={4}> {item.workersCount} </Col>
                 <Col span={4}>
                   <Space size="middle">
-                    <Button onClick={() => Edit(item.key)} type="primary" icon={<EditOutlined />}>
+                    <Button onClick={() => edit(item.key)} type="primary" icon={<EditOutlined />}>
                       Edit
                     </Button>
                     <Button
@@ -171,28 +166,44 @@ export const AgentsTable = () => {
       <Modal
         title="Edit Company"
         open={isEditModalOpen}
-        onOk={Submit}
+        onOk={submit}
         onCancel={handleSubmitCancel}
         footer={[]}
       >
         <Form
-          onFinish={Submit}
+          onFinish={submit}
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 10 }}
           layout="horizontal"
         >
           <Input name="agentId" value="04" hidden />
           <Form.Item label="Agent name">
-            <Input type="text" placeholder={items.sam[id].agentName} />
+            <Input
+              type="text"
+              onChange={(e) => setName(e.target.value)}
+              placeholder={items.sam[id].agentName}
+            />
           </Form.Item>
           <Form.Item label="NIC">
-            <Input type="text" placeholder={items.sam[id].NIC} />
+            <Input
+              type="text"
+              onChange={(e) => setNic(e.target.value)}
+              placeholder={items.sam[id].NIC}
+            />
           </Form.Item>
           <Form.Item label="Location">
-            <Input type="text" placeholder={items.sam[id].location} />
+            <Input
+              type="text"
+              onChange={(e) => setLoc(e.target.value)}
+              placeholder={items.sam[id].location}
+            />
           </Form.Item>
           <Form.Item label="Contact number">
-            <Input type="text" placeholder={items.sam[id].contactNo} />
+            <Input
+              type="text"
+              onChange={(e) => setCont(e.target.value)}
+              placeholder={items.sam[id].contactNo}
+            />
           </Form.Item>
           <Form.Item label="Available workers">
             <InputNumber value={items.sam[id].workersCount} />

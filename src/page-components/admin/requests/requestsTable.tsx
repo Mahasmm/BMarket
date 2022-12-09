@@ -60,9 +60,7 @@ const agentData = [
 export const RequestsTable = (props: any) => {
   const [compItems, setCompItems] = useState(companyData);
   const [agentItems, setAgentItems] = useState(agentData);
-  const [id, setId] = useState(0);
   let compData: any;
-  let agData: any;
 
   const turnCompApprove = (value: any) => {
     console.log('key ', value.key);
@@ -78,14 +76,12 @@ export const RequestsTable = (props: any) => {
   };
 
   const turnAgentApprove = (value: any) => {
-    setId(value.key);
     agentItems[value.key].approval = 'approve';
     setAgentItems(agentItems);
     console.log('approve', agentItems[value.key]);
   };
 
   const turnAgentReject = (value: any) => {
-    setId(value.key);
     agentItems[value.key].approval = 'reject';
     setAgentItems(agentItems);
     console.log('approve', agentItems[value.key]);
@@ -160,46 +156,44 @@ export const RequestsTable = (props: any) => {
         <Col span={4}> Action </Col>
       </Row>
 
-      {
-        (agData = agentItems.map((item) => {
-          return (
-            <>
-              <Row gutter={[16, 16]} className={styles.tableRow}>
-                <Col span={2}> {item.agentId} </Col>
-                <Col span={4}> {item.agentName} </Col>
-                <Col span={4}> {item.NIC} </Col>
-                <Col span={2}> {item.location} </Col>
-                <Col span={4}> {item.contactNo} </Col>
-                <Col span={4}> {item.reqDate} </Col>
-                <Col span={4}>
-                  {item.approval == 'approve' ? (
-                    <span>Accepted</span>
-                  ) : item.approval == 'reject' ? (
-                    <span>Rejected</span>
-                  ) : (
-                    <Space size="middle">
-                      <Button
-                        onClick={() => turnAgentApprove(item)}
-                        className={styles.successBtn}
-                        icon={<CheckOutlined />}
-                      >
-                        Accept
-                      </Button>
-                      <Button
-                        onClick={() => turnAgentReject(item)}
-                        className={styles.deleteBtn}
-                        icon={<CloseOutlined />}
-                      >
-                        Decline
-                      </Button>
-                    </Space>
-                  )}
-                </Col>
-              </Row>
-            </>
-          );
-        }))
-      }
+      {agentItems.map((item) => {
+        return (
+          <>
+            <Row gutter={[16, 16]} className={styles.tableRow}>
+              <Col span={2}> {item.agentId} </Col>
+              <Col span={4}> {item.agentName} </Col>
+              <Col span={4}> {item.NIC} </Col>
+              <Col span={2}> {item.location} </Col>
+              <Col span={4}> {item.contactNo} </Col>
+              <Col span={4}> {item.reqDate} </Col>
+              <Col span={4}>
+                {item.approval == 'approve' ? (
+                  <span>Accepted</span>
+                ) : item.approval == 'reject' ? (
+                  <span>Rejected</span>
+                ) : (
+                  <Space size="middle">
+                    <Button
+                      onClick={() => turnAgentApprove(item)}
+                      className={styles.successBtn}
+                      icon={<CheckOutlined />}
+                    >
+                      Accept
+                    </Button>
+                    <Button
+                      onClick={() => turnAgentReject(item)}
+                      className={styles.deleteBtn}
+                      icon={<CloseOutlined />}
+                    >
+                      Decline
+                    </Button>
+                  </Space>
+                )}
+              </Col>
+            </Row>
+          </>
+        );
+      })}
     </div>
   );
 };
