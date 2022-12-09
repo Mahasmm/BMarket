@@ -4,23 +4,25 @@ import VirtualList from 'rc-virtual-list';
 import axios from 'axios';
 import type { CheckboxValueType } from 'antd/es/checkbox/Group';
 import styles from './CompanyAgent.module.less';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 
 export type WorkerDetailsRef = {
   onVisible: (data: any) => void;
 };
 
-const WorkerDetails: ForwardRefRenderFunction<WorkerDetailsRef> = (props, ref) => {
-  const history = useRouter();
+export const WorkerDetails: ForwardRefRenderFunction<WorkerDetailsRef> = (props, ref) => {
+  // const history = useRouter();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const ContainerHeight = 400;
   const [data, setData] = useState<WorkerDetails[]>([]);
+  const [orders, setOrders] = useState<CheckboxValueType[]>([]);
 
   // let [TRating, setTRating] = useState(0);
   // let rating = 0;
 
   const onChange = (checkedValues: CheckboxValueType[]) => {
     console.log('checked = ', checkedValues);
+    setOrders(checkedValues);
   };
 
   interface WorkerDetails {
@@ -76,11 +78,24 @@ const WorkerDetails: ForwardRefRenderFunction<WorkerDetailsRef> = (props, ref) =
     }
   };
 
+  const order = async () => {
+    const response = await axios.post(
+      `http://localhost:8000/api/b1/company/booking/62e17ab9c4148c3fc08df1f4`,
+      {
+        agentId: '62e17ab9c4148c3fc08df1f4',
+        projectId: '62e17eeff5326d4c70106dbc',
+        workers: orders,
+      },
+    );
+
+    console.log(response.data);
+  };
+
   return (
     <Modal title="Skilled" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
       <div>
         <div>
-          <Button type="primary" shape="round">
+          <Button onClick={() => order()} type="primary" shape="round">
             Order
           </Button>
         </div>

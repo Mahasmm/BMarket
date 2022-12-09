@@ -33,9 +33,13 @@ export const HomePage = () => {
               </div>
               <div className={styles.SliderContent}>
                 <div className={styles.SliderProjectContainer}>
-                  <div className={styles.SliderProject}>
-                    <h2>Projects</h2>
-                  </div>
+                  <Link href="view-project">
+                    <a>
+                      <div className={styles.SliderProject}>
+                        <h2>Projects</h2>
+                      </div>
+                    </a>
+                  </Link>
                 </div>
                 <div className={styles.sliderSettings}>
                   <hr style={{ color: 'black' }} />
@@ -106,19 +110,31 @@ export const HomePage = () => {
                 </Link>
               </div>
               <div className={styles.gridIconName}>
-                <div className={styles.itemCircle}></div>
-                <p>Machine</p>
+                <Link href="machines">
+                  <div className={styles.itemCircle}></div>
+                </Link>
+                <Link href="machines">
+                  <a style={{ color: 'black' }}>Machine</a>
+                </Link>
               </div>
             </div>
             <br />
             <div className={styles.centerItem}>
               <div className={styles.gridIconName}>
-                <div className={styles.itemCircle}></div>
-                <p>Material</p>
+                <Link href="empty">
+                  <div className={styles.itemCircle}></div>
+                </Link>
+                <Link href="empty">
+                  <a style={{ color: 'black' }}>Material</a>
+                </Link>
               </div>
               <div className={styles.gridIconName}>
-                <div className={styles.itemCircle}></div>
-                <p>Trucks</p>
+                <Link href="empty">
+                  <div className={styles.itemCircle}></div>
+                </Link>
+                <Link href="empty">
+                  <a style={{ color: 'black' }}>Trucks</a>
+                </Link>
               </div>
             </div>
           </div>

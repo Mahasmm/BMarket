@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
-import React, { useState } from 'react';
-import { Layout, Avatar } from 'antd';
+import React from 'react';
+import { Layout } from 'antd';
 import styles from './home.module.less';
 import { MenuOutlined, BellOutlined } from '@ant-design/icons';
 import Link from 'next/link';

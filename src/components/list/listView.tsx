@@ -1,10 +1,9 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { Button, Col, Row, List, Card, Avatar } from 'antd';
+import { List, Avatar } from 'antd';
 import { UserAddOutlined } from '@ant-design/icons';
-import styles from './workers.module.less';
 import VirtualList from 'rc-virtual-list';
-import React, { useEffect, useState, useRef } from 'react';
-import WorkerModal, { WorkerDetailsRef } from './../modals/workerModal';
+import React, { useEffect, useRef } from 'react';
+import WorkerModal, { WorkerModalRef } from './../modals/workerModal';
 
 interface WorkerItem {
   contactEmail: string;
@@ -22,7 +21,7 @@ interface WorkerItem {
 
 export const ListView = (props: any) => {
   const ContainerHeight = 200;
-  const ref = useRef<WorkerDetailsRef>(null);
+  const ref = useRef<WorkerModalRef>(null);
 
   useEffect(() => {}, []);
 
@@ -53,7 +52,7 @@ export const ListView = (props: any) => {
                       ref?.current?.onVisible(item);
                     }}
                   >
-                    {item.contactName}
+                    {item.contactName}{' '}
                   </a>
                 }
               />

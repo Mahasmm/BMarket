@@ -1,38 +1,46 @@
-import React from 'react';
-import { AgentLayout } from '../../layout/AgentLayout/AgentLayout';
+import React, { useState } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import { Form, Input, Button, Select, Upload } from 'antd';
+import { Form, Input, Button, Upload } from 'antd';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 
-export const CreateWorkers = () => {
+export const SignUp = () => {
+  const history = useRouter();
   const validateMessages = {
     required: '${label} is required!',
     types: {
       email: '${label} is not a valid email!',
       number: '${label} is not a valid number!',
+      password: '${label} is not a valid',
     },
     number: {
       range: '${label} must be between ${min} and ${max}',
     },
   };
 
+  const [show, setShow] = useState(false);
+
   const onFinish = (values: any) => {
-    values.worker.agentId = '62e17ab9c4148c3fc08df1f4';
     console.log(values);
 
     axios
-      .post(`http://localhost:8000/api/b1/worker/${values.worker.agentId}`, values.worker)
+      .post(`http://localhost:8000/api/b1/manpower`, values.worker)
       .then(function (response) {
         console.log(response);
+        history.push('/auth/agent-login');
       })
       .catch(function (error) {
         console.log(error);
+        setShow(true);
       });
   };
 
   return (
-    <AgentLayout title="Create Workers">
-      <div>
+    <>
+      <div style={{ textAlign: 'center', marginTop: '10%', color: 'blue' }}>
+        <h2>Sign Up</h2>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Form
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 14 }}
@@ -60,20 +68,6 @@ export const CreateWorkers = () => {
           <Form.Item name={['worker', 'NIC']} label="NIC" rules={[{ required: true }]}>
             <Input />
           </Form.Item>
-          <Form.Item
-            name={['worker', 'skillCategory']}
-            label="Skill Category"
-            rules={[{ required: true }]}
-          >
-            <Select>
-              <Select.Option value={1}>BrickMason</Select.Option>
-              <Select.Option value={2}>TileSetter</Select.Option>
-              <Select.Option value={3}>Roofer</Select.Option>
-              <Select.Option value={4}>Carpenter</Select.Option>
-              <Select.Option value={5}>Reinforcement</Select.Option>
-              <Select.Option value={6}>Unskilled</Select.Option>
-            </Select>
-          </Form.Item>
 
           <Form.Item
             name={['worker', 'vaccineReport']}
@@ -88,13 +82,16 @@ export const CreateWorkers = () => {
             </Upload>
           </Form.Item>
 
-          <Form.Item
-            name={['worker', 'agentId']}
-            initialValue="62e17ab9c4148c3fc08df1f4"
-            style={{ marginTop: '-3rem' }}
-          >
-            <Input type="hidden" value="62e17ab9c4148c3fc08df1f4" />
+          <Form.Item name={['worker', 'password']} label="password" rules={[{ required: true }]}>
+            <Input.Password />
           </Form.Item>
+          {show ? (
+            <span style={{ color: 'red' }}>
+              Enter the Password between 5 to 12 alpha number characters
+            </span>
+          ) : (
+            ''
+          )}
 
           <Form.Item>
             <Button style={{ backgroundColor: 'green', color: 'white' }} htmlType="submit">
@@ -103,6 +100,6 @@ export const CreateWorkers = () => {
           </Form.Item>
         </Form>
       </div>
-    </AgentLayout>
+    </>
   );
 };

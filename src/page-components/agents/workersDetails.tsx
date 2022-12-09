@@ -1,38 +1,36 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { AgentLayout } from '../../layout/AgentLayout/AgentLayout';
-import { Button, Col, Row, List, Card, Avatar } from 'antd';
+import { Button, Col, Row } from 'antd';
 import { UserAddOutlined } from '@ant-design/icons';
 import styles from './workers.module.less';
 import { useRouter } from 'next/router';
-import VirtualList from 'rc-virtual-list';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ListView } from './../../components/list/listView';
 
-interface WorkerItem {
-  contactEmail: string;
-  availability: boolean;
-  NIC: string;
-  gender: string;
-  experience: {
-    iRating: number;
-    companyName: string;
-  };
-  contactName: string;
-  contactNo: string;
-  vaccineReport: string;
-}
+// interface WorkerItem {
+//   contactEmail: string;
+//   availability: boolean;
+//   NIC: string;
+//   gender: string;
+//   experience: {
+//     iRating: number;
+//     companyName: string;
+//   };
+//   contactName: string;
+//   contactNo: string;
+//   vaccineReport: string;
+// }
 
 export const WorkerDetails = () => {
   const history = useRouter();
-  const [data, setData] = useState<any[]>([]);
+  // const [data, setData] = useState<any[]>([]);
   const [brickMason] = useState<any[]>([]);
   const [tileSetter] = useState<any[]>([]);
   const [roofer] = useState<any[]>([]);
   const [carpenter] = useState<any[]>([]);
   const [reinforcement] = useState<any[]>([]);
   const [unSkilled] = useState<any[]>([]);
-  const ContainerHeight = 400;
 
   const getWorkers = async () => {
     try {
@@ -75,7 +73,7 @@ export const WorkerDetails = () => {
       });
       console.log(brickMason.length, tileSetter.length);
 
-      setData(response.data.data);
+      // setData(response.data.data);
     } catch (error) {
       console.error(error);
     }

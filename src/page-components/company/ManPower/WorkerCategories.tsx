@@ -1,17 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { CompanyLayout } from '../../../layout/CompanyLayout/CompanyLayout';
-import { Avatar, Row, Col, Button } from 'antd';
+import { Avatar, Row, Col, Spin } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import styles from './CompanyAgent.module.less';
 import axios from 'axios';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 // import { WorkerDetails } from './WorkerDetails';
 // import Sample, { HotTipsRef } from './../../sample';
 import WorkerDetails, { WorkerDetailsRef } from './WorkerDetails';
 
 export const WorkerCategories = () => {
-  const [data, setData] = useState<any[]>([]);
+  // const [data, setData] = useState<any[]>([]);
   const history = useRouter();
   const [brickMason] = useState<any[]>([]);
   const [tileSetter] = useState<any[]>([]);
@@ -61,7 +60,7 @@ export const WorkerCategories = () => {
       });
       console.log(brickMason.length, brickMason);
 
-      setData(response.data.data);
+      // setData(response.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -108,7 +107,7 @@ export const WorkerCategories = () => {
               </div>
             </Col>
           ) : (
-            <h1>hello {brickMason.length}</h1>
+            <Spin />
           )}
 
           {tileSetter.length != 0 ? (

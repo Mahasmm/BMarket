@@ -10,17 +10,13 @@ type Props = {
 export const CompanyLayout: FC<Props> = (props) => {
   const history = useRouter();
 
-  const backButton = () => {
-    history.back();
-  };
-
   return (
     <Layout>
       <div className={styles.container}>
         <div className={styles.topView}></div>
         <div className={styles.headerView}>
           <div className={styles.arrowView}>
-            <a onClick={() => backButton}>
+            <a onClick={() => history.back()}>
               <LeftOutlined style={{ fontSize: '22px', color: '#564F4F' }} />
             </a>
 
@@ -49,7 +45,7 @@ export const CompanyLayout: FC<Props> = (props) => {
           {/* </Col>
           </Row> */}
         </div>
-        <div className={styles.footer}></div>
+        {/* <div className={styles.footer}></div> */}
       </div>
     </Layout>
   );
