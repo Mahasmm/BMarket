@@ -99,7 +99,6 @@ export const CompaniesTable = () => {
       <Button className={styles.addBtn} icon={<PlusCircleOutlined />} onClick={showModal}>
         Add new company
       </Button>
-
       <Modal
         title="Create Company"
         open={isModalOpen}
