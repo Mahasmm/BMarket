@@ -3,35 +3,31 @@ import React, { useState } from 'react';
 import styles from './admin.module.less';
 import { DeleteOutlined, EditOutlined, PlusCircleOutlined } from '@ant-design/icons';
 
-const data = [
-  {
-    key: '0',
-    agentId: '001',
-    agentName: 'Ram',
-    NIC: '9626429884V',
-    location: 'Colombo',
-    contactNo: '0777556644',
-    workersCount: 10,
-  },
-  {
-    key: '1',
-    agentId: '002',
-    agentName: 'Azim',
-    NIC: '8926421114V',
-    location: 'Kandy',
-    contactNo: '0727776611',
-    workersCount: 5,
-  },
-  {
-    key: '2',
-    agentId: '003',
-    agentName: 'Chamal',
-    NIC: '9111429884V',
-    location: 'Galle',
-    contactNo: '0714356564',
-    workersCount: 7,
-  },
-];
+
+const data = {
+  sam: [
+    {
+      key: '0',
+      agentId: '01',
+      agentName: 'Raj Mohan',
+      NIC: '653486598V',
+      location: 'Colombo',
+      contactNo: '0763578907',
+      workersCount: 0,
+      status: true,
+    },
+    {
+      key: '1',
+      agentId: '02',
+      agentName: 'Ajith',
+      NIC: '943245162V',
+      location: 'Kandy',
+      contactNo: '0786754321',
+      workersCount: 4,
+      status: true,
+    },
+  ],
+};
 
 export const AgentsTable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -46,6 +42,47 @@ export const AgentsTable = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const showEditModal = () => {
+    setIsEditModalOpen(true);
+  };
+
+  const handleSubmitCancel = () => {
+    setIsEditModalOpen(false);
+  };
+
+  const [id, setId] = useState(0);
+  const [name, setName] = useState('');
+  const [loc, setLoc] = useState('');
+  const [nic, setNic] = useState('');
+  const [count] = useState(0);
+  const [cont, setCont] = useState('');
+  const [items, setItems] = useState(data);
+
+  const turnFalse = (value: any) => {
+    console.log('status ', value);
+    alert('Do you want to delete?');
+    console.log('Before ', items.sam[value]);
+    items.sam[value].status = false;
+    setItems(items);
+    console.log('After ', items.sam[value]);
+  };
+
+  const submit = () => {
+    items.sam[id].agentName = name;
+    items.sam[id].location = loc;
+    items.sam[id].NIC = nic;
+    items.sam[id].contactNo = cont;
+    items.sam[id].workersCount = count;
+    handleSubmitCancel();
+  };
+
+  const edit = (id: any) => {
+    showEditModal();
+    setId(id);
   };
 
   return (
@@ -68,18 +105,18 @@ export const AgentsTable = () => {
         ]}
       >
         <Form labelCol={{ span: 8 }} wrapperCol={{ span: 10 }} layout="horizontal">
-          <Input name="agentId" value="004" hidden />
+          <Input name="agentId" value="04" hidden />
           <Form.Item label="Agent name">
-            <Input />
+            <Input type="text" />
           </Form.Item>
           <Form.Item label="NIC">
-            <Input />
+            <Input type="text" />
           </Form.Item>
           <Form.Item label="Location">
-            <Input />
+            <Input type="text" />
           </Form.Item>
           <Form.Item label="Contact number">
-            <Input />
+            <Input type="text" />
           </Form.Item>
           <Form.Item label="Available workers">
             <InputNumber />
@@ -89,7 +126,7 @@ export const AgentsTable = () => {
 
       <div className={styles.body}>
         <Row gutter={[16, 16]} className={styles.tableHead}>
-          <Col span={2}> Agent Id </Col>
+          <Col span={2}> No </Col>
           <Col span={4}> Agent Name </Col>
           <Col span={4}> NIC </Col>
           <Col span={2}> Location </Col>
@@ -98,7 +135,7 @@ export const AgentsTable = () => {
           <Col span={4}> Action </Col>
         </Row>
 
-        {data.map((item) => {
+        {data.sam.map((item) => {
           return (
             <>
               <Row gutter={[16, 16]} className={styles.tableRow}>
@@ -110,10 +147,14 @@ export const AgentsTable = () => {
                 <Col span={4}> {item.workersCount} </Col>
                 <Col span={4}>
                   <Space size="middle">
-                    <Button type="primary" icon={<EditOutlined />}>
+                    <Button onClick={() => edit(item.key)} type="primary" icon={<EditOutlined />}>
                       Edit
                     </Button>
-                    <Button className={styles.deleteBtn} icon={<DeleteOutlined />}>
+                    <Button
+                      onClick={() => turnFalse(item.key)}
+                      className={styles.deleteBtn}
+                      icon={<DeleteOutlined />}
+                    >
                       Delete
                     </Button>
                   </Space>
@@ -123,6 +164,53 @@ export const AgentsTable = () => {
           );
         })}
       </div>
+      <Modal
+        title="Edit Company"
+        open={isEditModalOpen}
+        onOk={submit}
+        onCancel={handleSubmitCancel}
+        footer={[]}
+      >
+        <Form
+          onFinish={submit}
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 10 }}
+          layout="horizontal"
+        >
+          <Input name="agentId" value="04" hidden />
+          <Form.Item label="Agent name">
+            <Input
+              type="text"
+              onChange={(e) => setName(e.target.value)}
+              placeholder={items.sam[id].agentName}
+            />
+          </Form.Item>
+          <Form.Item label="NIC">
+            <Input
+              type="text"
+              onChange={(e) => setNic(e.target.value)}
+              placeholder={items.sam[id].NIC}
+            />
+          </Form.Item>
+          <Form.Item label="Location">
+            <Input
+              type="text"
+              onChange={(e) => setLoc(e.target.value)}
+              placeholder={items.sam[id].location}
+            />
+          </Form.Item>
+          <Form.Item label="Contact number">
+            <Input
+              type="text"
+              onChange={(e) => setCont(e.target.value)}
+              placeholder={items.sam[id].contactNo}
+            />
+          </Form.Item>
+          <Form.Item label="Available workers">
+            <InputNumber value={items.sam[id].workersCount} />
+          </Form.Item>
+        </Form>
+      </Modal>
     </>
   );
 };

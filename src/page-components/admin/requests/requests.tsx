@@ -33,14 +33,6 @@ export const requests = () => {
             {' '}
             <Link href="/admin/agents">Agents</Link>{' '}
           </Menu.Item>
-          <Menu.Item key="worker" disabled>
-            {' '}
-            <Link href="/admin/requests">Workers</Link>{' '}
-          </Menu.Item>
-          <Menu.Item key="machine" disabled>
-            {' '}
-            <Link href="/admin/requests">Machineries</Link>{' '}
-          </Menu.Item>
           <Menu.Item key="requests">
             {' '}
             <Link href="/admin/requests">All Requests</Link>{' '}

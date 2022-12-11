@@ -22,14 +22,6 @@ export const agents = () => (
           {' '}
           <Link href="/admin/agents">Agents</Link>{' '}
         </Menu.Item>
-        <Menu.Item key="worker" disabled>
-          {' '}
-          <Link href="/admin/agents">Workers</Link>{' '}
-        </Menu.Item>
-        <Menu.Item key="machine" disabled>
-          {' '}
-          <Link href="/admin/agents">Machineries</Link>{' '}
-        </Menu.Item>
         <Menu.Item key="requests">
           {' '}
           <Link href="/admin/requests">All Requests</Link>{' '}
