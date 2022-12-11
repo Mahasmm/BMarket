@@ -1,22 +1,92 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# BMarket App Project
 
-## Getting Started
+This is an application going to use in civil engineering industry for their basic needs like man power, heavy machinery and raw materials to fulfill through online. It's completely User Responsive web application for enterprise companies. We used `React`, `Nextjs`, `Ant design` and `mongodb` for the development of BMarket Application.
 
-First, run the development server:
+## How to do local deployment?
+
+1.  First of all, clone the repository from github.
 
 ```bash
-npm run dev
-# or
+git clone https://github.com/Mahasmm/BMarket.git
+```
+
+2. For further steps, we need NodeJs setup in your local machine. To install check the [instructions](https://nodejs.org/en/download/)
+
+After node installation, check `node` and `npm` versions.
+
+- Check node version
+
+```bash
+node -v
+```
+
+- Check npm version
+
+```bash
+npm -v
+```
+
+- Install yarn package
+
+```bash
+npm install –global yarn
+```
+
+3.  We have to run the development server:
+
+```bash
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4.  Paste the local server url in your browser address bar
+    url: http://localhost:3000
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Finally you can ensure the BMarket App is successfully deployed on your local machine.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## In order to execute backend connectivity, follow the below steps:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Clone backend repository from github.
+
+```bash
+ git clone https://github.com/Mahasmm/BMarket_Back_End.git
+```
+
+2. We need to check node version, npm version
+
+```bash
+If you haven't installed yet, please check above early steps.
+```
+
+You can check and ensure the versions
+
+```bash
+node -v
+npm -v
+```
+
+3 . Install yarn package
+
+```bash
+npm install –global yarn
+```
+
+4.Last step is backend server run
+
+```bash
+yarn dev
+```
+
+Now you have backend connectivity successfully. Hurray...!!!🎉
+
+## Development Team
+
+| Name | Profile |
+|--|--|
+| Milhar Mahas | (https://github.com/Mahasmm) |
+| Rupeekshan Maheswaran | (https://github.com/Rupeekshan)  |
+| Virandra Perera | (https://github.com/virandraperera) |
+| Nanthakumar Mithusiga | (https://github.com/NanthakumarMithusiga) |
+| Fathima Afra | (https://github.com/NanthakumarMithusiga) |
 
 ## Learn More
 
@@ -27,8 +97,6 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Copyrights
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+All code rights are reserved to `BMarket` Development team

@@ -1,3 +1,3 @@
-import { sample } from '../page-components/sample';
+import { sample } from '../components/sample';
 
 export default sample;
